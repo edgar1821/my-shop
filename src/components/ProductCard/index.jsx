@@ -26,7 +26,7 @@ function ProductCard(props) {
 
         <Card.Text>{`precio S/${price}`}</Card.Text>
         <Button variant="primary" onClick={handleClickAdd}>
-          Agregar{' '}
+          Agregar
         </Button>
       </Card.Body>
     </Card>

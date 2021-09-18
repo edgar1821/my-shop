@@ -10,9 +10,9 @@ function useFetchData(url) {
   })
   const GetData = async () => {
     try {
-      const response = (await (await fetch(url)).json()) || []
-
-      if (response && response.length > 0) {
+      const response = (await (await fetch(url)).json()) || {}
+      // console.log(response)
+      if (response) {
         const data = { status: Status.SUCCESS, payload: response }
         setResponse(data)
       }
