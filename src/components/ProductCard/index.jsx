@@ -18,7 +18,6 @@ function ProductCard(props) {
     const { listaProductos = [] } = state
     listaProductos.push(props)
     dispatch({ type: 'ADD_PRODUCT', payload: listaProductos })
-    // console.log('dispatch', props)
   }
   return (
     <Card style={{ width: '18rem', marginBottom: 10, marginRight: 10 }}>

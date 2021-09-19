@@ -9,7 +9,6 @@ function Layout({ children }) {
   // const state = useContext(Context)
   const [state] = useReducer(reducer, initialState)
   const { listaProductos = [] } = state
-  console.log('listaProductos', listaProductos)
   const carritoLavel = `Carrito ${listaProductos.length}`
   let total = 0
   listaProductos.forEach((element) => {
