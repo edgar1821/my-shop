@@ -5,27 +5,14 @@ import { Container } from 'react-bootstrap'
 import useFetchData from '../../hooks/useFetchData'
 import { PRODUCT_DETAIL } from '../../constants/endpoints'
 import * as Status from '../../constants/status'
+import { useReducer } from 'react'
+import reducer from '../../context/reducer'
+import { initialState } from '../../context'
 
 function Detail() {
   const { id = '' } = useParams()
+  const [state, dispatch] = useReducer(reducer, initialState)
   const url = `${PRODUCT_DETAIL}${id}`
-  // const response = useFetchData(url)
-  // const response = {
-  //   status: 1,
-  //   payload: {
-  //     id: 3,
-  //     title: 'Mens Cotton Jacket',
-  //     price: 55.99,
-  //     description:
-  //       'great outerwear jackets for Spring/Autumn/Winter, suitable for many occasions, such as working, hiking, camping, mountain/rock climbing, cycling, traveling or other outdoors. Good gift choice for you or your family member. A warm hearted love to Father, husband or son in this thanksgiving or Christmas Day.',
-  //     category: "men's clothing",
-  //     image: 'https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg',
-  //     rating: {
-  //       rate: 4.7,
-  //       count: 500,
-  //     },
-  //   },
-  // }
   const { status = Status.PENDING, payload = {} } = useFetchData(url)
   const {
     title = '',
@@ -34,6 +21,12 @@ function Detail() {
     image = '',
     category,
   } = payload
+
+  function handleClick(){
+    const { listaProductos = [] } = state
+    listaProductos.push(payload)
+    dispatch({ type: 'ADD_PRODUCT', payload: listaProductos })
+  }
   return (
     <Layout>
       <Container>
@@ -67,7 +60,7 @@ function Detail() {
               </Row>
               <Row>
                 <Col md={12}>
-                  <Button variant="primary">Agregar al carrito</Button>
+                  <Button variant="primary" onClick={handleClick}>Agregar al carrito</Button>
                 </Col>
               </Row>
             </Col>
